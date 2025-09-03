@@ -3,54 +3,33 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 module.exports = {
   development: {
-    username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'password',
-    database: process.env.DB_NAME || 'eshop_dev',
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
+    dialect: 'sqlite',
+    storage: './dev.sqlite',
     logging: console.log,
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
+    define: {
+      timestamps: true,
+      underscored: false,
+      freezeTableName: true
     }
   },
   test: {
-    username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'password',
-    database: process.env.DB_NAME_TEST || 'eshop_test',
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
+    dialect: 'sqlite',
+    storage: ':memory:',
     logging: false,
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
+    define: {
+      timestamps: true,
+      underscored: false,
+      freezeTableName: true
     }
   },
   production: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
+    dialect: 'sqlite',
+    storage: './production.sqlite',
     logging: false,
-    pool: {
-      max: 20,
-      min: 0,
-      acquire: 60000,
-      idle: 10000
-    },
-    dialectOptions: {
-      ssl: process.env.DB_SSL === 'true' ? {
-        require: true,
-        rejectUnauthorized: false
-      } : false
+    define: {
+      timestamps: true,
+      underscored: false,
+      freezeTableName: true
     }
   }
 };

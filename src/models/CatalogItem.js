@@ -1,5 +1,7 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
+const { DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
   const CatalogItem = sequelize.define('CatalogItem', {
     id: {
       type: DataTypes.UUID,
@@ -10,12 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [2, 100]
+        notEmpty: true,
+        len: [1, 255]
       }
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     price: {
       type: DataTypes.DECIMAL(10, 2),
@@ -23,12 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         min: 0
       }
-    },
-    pictureFileName: {
-      type: DataTypes.STRING
-    },
-    pictureUri: {
-      type: DataTypes.STRING
     },
     catalogTypeId: {
       type: DataTypes.UUID,
@@ -53,56 +50,56 @@ module.exports = (sequelize, DataTypes) => {
         min: 0
       }
     },
-    restockThreshold: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
-    },
-    maxStockThreshold: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
-    },
-    onReorder: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-    },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },
-    averageRating: {
-      type: DataTypes.DECIMAL(3, 2),
-      defaultValue: 0
+    pictureFileName: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
-    reviewCount: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
+    pictureUri: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
+  }, {
+    tableName: 'CatalogItems',
+    timestamps: true,
+    indexes: [
+      {
+        fields: ['catalogTypeId']
+      },
+      {
+        fields: ['catalogBrandId']
+      },
+      {
+        fields: ['isActive']
+      },
+      {
+        fields: ['price']
+      }
+    ]
   });
 
-  CatalogItem.associate = function(models) {
-    CatalogItem.belongsTo(models.CatalogType, { 
-      foreignKey: 'catalogTypeId', 
-      as: 'catalogType' 
+  CatalogItem.associate = (models) => {
+    CatalogItem.belongsTo(models.CatalogType, {
+      foreignKey: 'catalogTypeId',
+      as: 'catalogType'
     });
-    CatalogItem.belongsTo(models.CatalogBrand, { 
-      foreignKey: 'catalogBrandId', 
-      as: 'catalogBrand' 
+    
+    CatalogItem.belongsTo(models.CatalogBrand, {
+      foreignKey: 'catalogBrandId',
+      as: 'catalogBrand'
     });
-    CatalogItem.hasMany(models.BasketItem, { 
-      foreignKey: 'catalogItemId', 
-      as: 'basketItems' 
+
+    CatalogItem.hasMany(models.BasketItem, {
+      foreignKey: 'catalogItemId',
+      as: 'basketItems'
     });
-    CatalogItem.hasMany(models.OrderItem, { 
-      foreignKey: 'catalogItemId', 
-      as: 'orderItems' 
-    });
-    CatalogItem.hasMany(models.Review, { 
-      foreignKey: 'catalogItemId', 
-      as: 'reviews' 
-    });
-    CatalogItem.hasMany(models.Wishlist, { 
-      foreignKey: 'catalogItemId', 
-      as: 'wishlists' 
+
+    CatalogItem.hasMany(models.OrderItem, {
+      foreignKey: 'catalogItemId',
+      as: 'orderItems'
     });
   };
 

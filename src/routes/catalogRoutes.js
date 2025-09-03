@@ -22,8 +22,7 @@ router.get('/types', getCatalogTypes);
 // Admin routes
 router.post('/items', 
   authenticateToken, 
-  requireAdmin, 
-  upload.single('image'), 
+  requireAdmin,  
   catalogValidation.createItem, 
   createCatalogItem
 );
