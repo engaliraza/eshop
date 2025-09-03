@@ -1,0 +1,126 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-xl) 0;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: var(--gray-50);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.pagination-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.pagination-page:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: var(--gray-50);
+}
+
+.pagination-page.active {
+  color: white;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.pagination-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-left: var(--spacing-md);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .pagination {
+    gap: var(--spacing-xs);
+  }
+
+  .pagination-btn {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .pagination-page {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8125rem;
+  }
+
+  .pagination-ellipsis {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pagination-info {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-top: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-btn span {
+    display: none;
+  }
+
+  .pagination-pages {
+    order: -1;
+  }
+}

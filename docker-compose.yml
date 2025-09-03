@@ -1,25 +1,24 @@
-version: '3.4'
+version: '3.8'
 
 services:
-  eshopwebmvc:
-    image: ${DOCKER_REGISTRY-}eshopwebmvc
-    build:
-      context: .
-      dockerfile: src/Web/Dockerfile
-    depends_on:
-      - "sqlserver"
-  eshoppublicapi:
-    image: ${DOCKER_REGISTRY-}eshoppublicapi
-    build:
-      context: .
-      dockerfile: src/PublicApi/Dockerfile
-    depends_on:
-      - "sqlserver"
-  sqlserver:
-    image: mcr.microsoft.com/azure-sql-edge
-    ports:
-      - "1433:1433"
+  db:
+    image: postgres:15-alpine
+    container_name: eshop_db
+    restart: always
     environment:
-      - SA_PASSWORD=@someThingComplicated1234
-      - ACCEPT_EULA=Y
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTG-RES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: ${DB_NAME:-eshop_dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - eshop_data:/var/lib/postgresql/data
+    networks:
+      - eshop-network
 
+volumes:
+  eshop_data:
+
+networks:
+  eshop-network:
+    driver: bridge
