@@ -24,3 +24,4 @@ router.put('/profile', authenticateToken, userValidation.updateProfile, updatePr
 router.put('/change-password', authenticateToken, userValidation.changePassword, changePassword);
 
 module.exports = router;
+// Updated: 2025-09-04 16:51:05

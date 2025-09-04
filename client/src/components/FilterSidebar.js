@@ -174,3 +174,4 @@ const FilterSidebar = ({ brands, types, filters, onFilterChange, onClearFilters 
 };
 
 export default FilterSidebar;
+/* Updated: 2025-09-04 16:51:36 */

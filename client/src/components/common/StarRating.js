@@ -59,3 +59,4 @@ const StarRating = ({ rating = 0, maxRating = 5, size = 'small', showValue = fal
 };
 
 export default StarRating;
+/* Updated: 2025-09-04 16:51:36 */

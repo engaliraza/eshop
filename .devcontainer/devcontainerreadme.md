@@ -34,3 +34,5 @@ You can learn more in the [Dev Containers documentation](https://code.visualstud
 * If you get a `502 bad gateway` error, you may need to set your port to the https protocol. You can do this by opening the Ports view in VS Code (**Ports: Focus on Ports View**), right-clicking on the port you're using, select **Change Port Protocol**, and set **https**.
 * If you are working with the same repository folder in a container and Windows, you'll want consistent line endings (otherwise you may see hundreds of changes in the SCM view). The `.gitattributes` file in the root of this repo disables line ending conversion and should prevent this. See [tips and tricks](https://code.visualstudio.com/docs/devcontainers/tips-and-tricks#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files) for more info.
 * If you'd like to review the contents of the image used in this dev container, you can check it out in the [devcontainers/images](https://github.com/devcontainers/images/tree/main/src/dotnet) repo.
+
+# Updated: 2025-09-04 16:47:56

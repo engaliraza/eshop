@@ -184,3 +184,5 @@ router.post('/types', authenticateToken, requireAdmin, async (req, res) => {
 });
 
 module.exports = router;
+
+// Updated: 2025-09-04 16:51:05
